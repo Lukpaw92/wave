@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      margin: 0;
+      background-color: #fdf6e3; /* matches the light beige background */
+      overflow: hidden;
+    }
+
+    .marquee-wrapper {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    .marquee {
+      display: inline-block;
+      animation: scroll 10s linear infinite;
+      font-size: 48px;
+      font-weight: 500;
+      font-family: sans-serif;
+      color: #66dd88; /* bright green from the screenshot */
+    }
+
+    .marquee span {
+      display: inline-block;
+      margin-right: 50px;
+      animation: wave 2s ease-in-out infinite;
+    }
+
+    .marquee span:nth-child(odd) {
+      animation-delay: 0.2s;
+    }
+
+    .marquee span:nth-child(even) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes wave {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-10px) rotate(2deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="marquee-wrapper">
+    <div class="marquee" id="waveText">
+      <!-- repeated content to create seamless loop -->
+    </div>
+  </div>
+
+  <script>
+    const text = 'Najbliższe wydarzenie';
+    const count = 10; // Repeat 10 times for infinite illusion
+    const container = document.getElementById('waveText');
+    let fullHTML = '';
+    for (let i = 0; i < count; i++) {
+      for (let j = 0; j < text.length; j++) {
+        const delay = j * 0.1;
+        fullHTML += `<span style="animation-delay:${delay}s">${text[j]}</span>`;
+      }
+    }
+    container.innerHTML = fullHTML;
+  </script>
+</body>
+</html>
